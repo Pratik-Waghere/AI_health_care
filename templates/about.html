@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Health Diagnosis System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">About Health Diagnosis System</h3>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h4>Our Mission</h4>
+                    <p class="lead">To provide accessible and reliable health diagnosis through advanced technology and medical expertise.</p>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Project Overview</h5>
+                    <p>The Health Diagnosis System is an innovative platform that combines artificial intelligence with medical knowledge to help users understand their symptoms and get appropriate medical guidance. Our system provides:</p>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">Symptom-based disease prediction</li>
+                        <li class="list-group-item">Personalized health recommendations</li>
+                        <li class="list-group-item">Doctor suggestions based on symptoms</li>
+                        <li class="list-group-item">Health tracking and monitoring</li>
+                        <li class="list-group-item">Preventive care guidelines</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Technology Stack</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">Frontend: HTML, CSS, Bootstrap, JavaScript</li>
+                                <li class="list-group-item">Backend: Python, Flask</li>
+                                <li class="list-group-item">Database: SQLite</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">AI/ML: scikit-learn, pandas, numpy</li>
+                                <li class="list-group-item">Authentication: Flask-Login</li>
+                                <li class="list-group-item">Security: Password hashing, CSRF protection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Our Team</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">John Doe</h6>
+                                    <p class="card-text">Lead Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Jane Smith</h6>
+                                    <p class="card-text">Medical Consultant</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Mike Johnson</h6>
+                                    <p class="card-text">UI/UX Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary">Contact Us</a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

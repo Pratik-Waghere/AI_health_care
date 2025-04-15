@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Precautions - Health Diagnosis System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Health Precautions</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p class="mb-0">Here are some general health precautions to maintain your well-being:</p>
+                </div>
+
+                <div class="mt-4">
+                    <h5>General Health Tips</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Maintain a balanced diet with plenty of fruits and vegetables</li>
+                        <li class="list-group-item">Stay hydrated by drinking at least 8 glasses of water daily</li>
+                        <li class="list-group-item">Get regular exercise (at least 30 minutes per day)</li>
+                        <li class="list-group-item">Ensure adequate sleep (7-8 hours per night)</li>
+                        <li class="list-group-item">Practice good hygiene and wash hands regularly</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Preventive Measures</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Schedule regular health check-ups</li>
+                        <li class="list-group-item">Keep vaccinations up to date</li>
+                        <li class="list-group-item">Manage stress through meditation or relaxation techniques</li>
+                        <li class="list-group-item">Avoid smoking and limit alcohol consumption</li>
+                        <li class="list-group-item">Maintain a healthy weight</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Emergency Preparedness</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Keep emergency contact numbers handy</li>
+                        <li class="list-group-item">Maintain a first-aid kit at home</li>
+                        <li class="list-group-item">Know the location of the nearest hospital</li>
+                        <li class="list-group-item">Keep important medical records accessible</li>
+                    </ul>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

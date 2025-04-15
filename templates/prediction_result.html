@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result - Health Diagnosis System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Prediction Result</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">Predicted Condition</h4>
+                    <p class="mb-0">Based on your symptoms, you might be experiencing:</p>
+                    <h5 class="mt-2">{{ prediction.disease }}</h5>
+                    <p class="mb-0">Confidence Score: {{ prediction.confidence }}%</p>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Recommended Actions</h5>
+                    <ul class="list-group">
+                        {% for action in prediction.recommendations %}
+                        <li class="list-group-item">{{ action }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Precautions</h5>
+                    <ul class="list-group">
+                        {% for precaution in prediction.precautions %}
+                        <li class="list-group-item">{{ precaution }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h5>When to See a Doctor</h5>
+                    <p>{{ prediction.when_to_see_doctor }}</p>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <a href="{{ url_for('doctor_suggestion') }}" class="btn btn-primary">Find Recommended Doctors</a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Symptom Checker - Health Diagnosis System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Symptom Checker</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('symptom_form') }}">
+                    <div class="mb-4">
+                        <h5>General Symptoms</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="fever" id="fever">
+                                    <label class="form-check-label" for="fever">Fever</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="fatigue" id="fatigue">
+                                    <label class="form-check-label" for="fatigue">Fatigue</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="headache" id="headache">
+                                    <label class="form-check-label" for="headache">Headache</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="cough" id="cough">
+                                    <label class="form-check-label" for="cough">Cough</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="sore_throat" id="sore_throat">
+                                    <label class="form-check-label" for="sore_throat">Sore Throat</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="runny_nose" id="runny_nose">
+                                    <label class="form-check-label" for="runny_nose">Runny Nose</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="shortness_of_breath" id="shortness_of_breath">
+                                    <label class="form-check-label" for="shortness_of_breath">Shortness of Breath</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="chest_pain" id="chest_pain">
+                                    <label class="form-check-label" for="chest_pain">Chest Pain</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="dizziness" id="dizziness">
+                                    <label class="form-check-label" for="dizziness">Dizziness</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Digestive Symptoms</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="nausea" id="nausea">
+                                    <label class="form-check-label" for="nausea">Nausea</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="vomiting" id="vomiting">
+                                    <label class="form-check-label" for="vomiting">Vomiting</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="diarrhea" id="diarrhea">
+                                    <label class="form-check-label" for="diarrhea">Diarrhea</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="abdominal_pain" id="abdominal_pain">
+                                    <label class="form-check-label" for="abdominal_pain">Abdominal Pain</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="loss_of_appetite" id="loss_of_appetite">
+                                    <label class="form-check-label" for="loss_of_appetite">Loss of Appetite</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="constipation" id="constipation">
+                                    <label class="form-check-label" for="constipation">Constipation</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Other Symptoms</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="muscle_pain" id="muscle_pain">
+                                    <label class="form-check-label" for="muscle_pain">Muscle Pain</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="joint_pain" id="joint_pain">
+                                    <label class="form-check-label" for="joint_pain">Joint Pain</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="rash" id="rash">
+                                    <label class="form-check-label" for="rash">Rash</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="swelling" id="swelling">
+                                    <label class="form-check-label" for="swelling">Swelling</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="anxiety" id="anxiety">
+                                    <label class="form-check-label" for="anxiety">Anxiety</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="symptoms" value="depression" id="depression">
+                                    <label class="form-check-label" for="depression">Depression</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Check Symptoms</button>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
