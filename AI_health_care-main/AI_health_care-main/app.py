@@ -142,6 +142,7 @@ class Doctor(db.Model):
     specialization = db.Column(db.String(100), nullable=False)
     contact = db.Column(db.String(20))
     hospital = db.Column(db.String(200))
+    # add = db.Column(db.String(200))
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -255,6 +256,16 @@ def symptom_form():
         # Retrieve selected symptoms from the form submission
         symptoms = request.form.getlist('symptoms')  # Use getlist to capture all selected symptoms
         
+        # Get additional symptoms from the text box
+        additional_symptoms_text = request.form.get('additional_symptoms', '').strip()
+        
+        # Process additional symptoms if provided
+        if additional_symptoms_text:
+            # Split by commas and clean up each symptom
+            additional_symptoms = [symptom.strip().lower().replace(' ', '_') for symptom in additional_symptoms_text.split(',')]
+            # Add to the symptoms list
+            symptoms.extend(additional_symptoms)
+        
         # Debug: Print selected symptoms
         print(f"Selected symptoms: {symptoms}")
         
@@ -285,8 +296,27 @@ def prediction_result():
 @app.route('/doctor_suggestion')
 @login_required
 def doctor_suggestion():
-    doctors = Doctor.query.all()
-    return render_template('doctor_suggestion.html', doctors=doctors)
+    disease = request.args.get('disease', None)
+
+    # Map diseases to specializations
+    disease_specialization_map = {
+        "Common Cold": "General Physician",
+        "COVID-19": "Pulmonologist",
+        "Depression": "Psychiatrist",
+        "Disease (Generic)": "General Physician",
+        "Flu": "General Physician",
+        "Gastroenteritis": "Gastroenterologist",
+        "Anxiety Disorder": "Psychiatrist"
+    }
+
+    specialization = disease_specialization_map.get(disease, None)
+
+    if specialization:
+        doctors = Doctor.query.filter_by(specialization=specialization).all()
+    else:
+        doctors = Doctor.query.all()
+
+    return render_template('doctor_suggestion.html', doctors=doctors, disease=disease, specialization=specialization)
 
 @app.route('/precautions')
 @login_required
@@ -313,8 +343,16 @@ def predict_disease(symptoms):
     # Debug: Print the input symptoms
     print(f"Input symptoms: {symptoms}")
     
+    # Filter out symptoms that are not in the SYMPTOMS list
+    # This ensures we only use symptoms that the model was trained on
+    valid_symptoms = [symptom for symptom in symptoms if symptom in SYMPTOMS]
+    
+    # If no valid symptoms were provided, return an error
+    if not valid_symptoms:
+        return {"error": "No valid symptoms were provided. Please select from the list or enter symptoms that match the predefined list."}
+    
     # Create a binary vector (1 if symptom present, else 0)
-    symptom_array = np.array([[1 if symptom in symptoms else 0 for symptom in SYMPTOMS]])
+    symptom_array = np.array([[1 if symptom in valid_symptoms else 0 for symptom in SYMPTOMS]])
     
     # Debug: Check the structure of the symptom array
     print(f"Symptom array shape: {symptom_array.shape}")
@@ -361,6 +399,8 @@ def predict_disease(symptoms):
         return {"error": "Model is not loaded correctly."}
 
     # Return the result in a structured dictionary
+    # Store the predicted disease in session storage
+    session['predicted_disease'] = predicted_disease
     return {
         "disease": predicted_disease,
         "confidence": confidence_score,
@@ -368,6 +408,21 @@ def predict_disease(symptoms):
         "precautions": PRECAUTIONS.get(predicted_disease, ["Maintain good hygiene and follow general health guidelines."]),
         "when_to_see_doctor": DOCTOR_VISITS.get(predicted_disease, "If symptoms worsen or persist, consult a healthcare provider.")
     }
+
+@app.route('/add_specialty_doctors')
+def add_specialty_doctors():
+    doctors = [
+        Doctor(name="Dr. Ramesh Verma", specialization="General Physician", contact="1111111111", hospital="City Clinic", add="101 Street A"),
+        Doctor(name="Dr. Seema Nair", specialization="Pulmonologist", contact="2222222222", hospital="Lung Care Hospital", add="102 Street B"),
+        Doctor(name="Dr. Anita Sharma", specialization="Psychiatrist", contact="3333333333", hospital="Mind Wellness Center", add="103 Street C"),
+        Doctor(name="Dr. Vivek Joshi", specialization="General Physician", contact="4444444444", hospital="Health Hub", add="104 Street D"),
+        Doctor(name="Dr. Neha Kapoor", specialization="General Physician", contact="5555555555", hospital="Flu Clinic", add="105 Street E"),
+        Doctor(name="Dr. Arjun Mehta", specialization="Gastroenterologist", contact="6666666666", hospital="Digestive Health Institute", add="106 Street F")
+    ]
+    db.session.bulk_save_objects(doctors)
+    db.session.commit()
+    return "Specialty-based doctors added!"
+
 
 @app.route('/logout')
 @login_required

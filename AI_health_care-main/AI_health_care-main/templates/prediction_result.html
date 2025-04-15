@@ -41,9 +41,12 @@
                 </div>
 
                 <div class="d-grid gap-2 mt-4">
-                    <a href="{{ url_for('doctor_suggestion') }}" class="btn btn-primary">Find Recommended Doctors</a>
+                    <a href="{{ url_for('doctor_suggestion', disease=prediction.disease) }}" class="btn btn-primary">
+                        Find Recommended Doctors
+                    </a>
                     <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
                 </div>
+                
             </div>
         </div>
     </div>

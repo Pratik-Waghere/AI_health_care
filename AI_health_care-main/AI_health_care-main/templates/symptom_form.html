@@ -131,6 +131,15 @@
                         </div>
                     </div>
 
+                    <div class="mb-4">
+                        <h5>Additional Symptoms</h5>
+                        <div class="form-group">
+                            <label for="additional_symptoms">Enter any other symptoms not listed above (separate multiple symptoms with commas):</label>
+                            <textarea class="form-control" id="additional_symptoms" name="additional_symptoms" rows="3" placeholder="e.g., blurred vision, numbness, tingling"></textarea>
+                            <small class="form-text text-muted">Note: For best results, try to match your symptoms with the predefined list above. If you enter symptoms that don't match the system's vocabulary, they may not be included in the diagnosis.</small>
+                        </div>
+                    </div>
+
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">Check Symptoms</button>
                         <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
