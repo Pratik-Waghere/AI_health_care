@@ -304,6 +304,7 @@ def doctor_suggestion():
         "COVID-19": "Pulmonologist",
         "Depression": "Psychiatrist",
         "Disease (Generic)": "General Physician",
+        "Common Cold": "General Physician",
         "Flu": "General Physician",
         "Gastroenteritis": "Gastroenterologist",
         "Anxiety Disorder": "Psychiatrist"
@@ -422,6 +423,17 @@ def add_specialty_doctors():
     db.session.bulk_save_objects(doctors)
     db.session.commit()
     return "Specialty-based doctors added!"
+
+@app.route('/book_appointment', methods=['POST'])
+def book_appointment():
+    doctor_name = request.form.get('doctor_name')
+    appointment_date = request.form.get('appointment_date')
+    appointment_time = request.form.get('appointment_time')
+    
+    # Save to database or log
+    flash(f'Appointment booked with {doctor_name} on {appointment_date} at {appointment_time}.', 'success')
+    return redirect(url_for('doctor_suggestion'))
+
 
 
 @app.route('/logout')
